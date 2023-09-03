@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +95,8 @@ DATABASES = {
     }
     }
 
+AUTH_USER_MODEL = 'accounts.User'###to tell django that we are using the custom user model created in accounts app
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -134,6 +138,9 @@ STATICFILES_DIRS =[
     'food_online_django/static'
 ]
 
+##media file configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
