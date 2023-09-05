@@ -110,16 +110,7 @@ class UserProfile(models.Model):
         return self.user.email
     
     
-@receiver(post_save,sender=User) 
-def post_save_create_profile_receiver(sender,instance,created,**kwargs):  
-    print("Created")
-    if created:
-        UserProfile.objects.create(user=instance)
-        print("User Profile created")
-    else:
-        profile = UserProfile.objects.get(user=instance)
-        profile.save()
-        print("User is updated")  
+ 
 
     def save(self, *args, **kwargs):###django signal
         if self.latitude and self.longitude:
