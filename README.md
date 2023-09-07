@@ -6,7 +6,7 @@ This will have four apps
 2. Customers
 3. Food_Online
 4. Marketplace
-This flow chart gives the entire concept of creating this project-link
+This flow chart gives the entire concept of creating this project
 
 ![foodOnline-Flowchart](https://github.com/Akanshasaxena10/Food_online_Django_Project/assets/112557958/824a1d26-843a-49d6-ae1d-e5f92f592cd8)
 market place
