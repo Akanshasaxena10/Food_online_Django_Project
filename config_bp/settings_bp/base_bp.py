@@ -1,3 +1,4 @@
+
 """
 Django settings for food_online_django project.
 
@@ -11,34 +12,17 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
-
-import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-env=environ.Env()
-environ.Env.read_env(str(BASE_DIR/'.env'))
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
 
-INSTALLED_APPS = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,8 +30,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+   
+]
+
+CUSTOM_APPS = [
     'accounts',
     'vendor',
+    
+]
+
+THIRD_PARTY_APPS  = []
+
+
+INSTALLED_APPS = [
+    *DEFAULT_APPS,*CUSTOM_APPS,*THIRD_PARTY_APPS,
 ]
 
 MIDDLEWARE = [
@@ -79,22 +75,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'food_online_django.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER'),
-        'PASSWORD': env.str('DB_PWD'),
-        'HOST': env.str('DB_HOST'),
-        'PORT': env.int('DB_PORT'),
-    }
-    }
 
 AUTH_USER_MODEL = 'accounts.User'###to tell django that we are using the custom user model created in accounts app
 
@@ -129,14 +109,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT= BASE_DIR / 'static'
+STATIC_ROOT=[str( BASE_DIR / 'static')]
 STATICFILES_DIRS =[
-    'food_online_django/static'
+    'food_online_django/config/settings/base.py/static'
 ]
 
 ##media file configuration
@@ -154,13 +133,3 @@ MESSAGE_TAGS ={
  }
 
 
-#Email verification
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True
-DEFAULT_FROM_MAIL = 'foodOnline Marketplace <akanshasaxena10@gmail.com>'
-
-
- 
